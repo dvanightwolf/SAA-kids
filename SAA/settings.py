@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
+    'learnwithtyourkids.apps.LearnwithtyourkidsConfig',
     'activity.apps.ActivityConfig',
     'workshops.apps.WorkshopsConfig',
     'django.contrib.admin',
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'SAA.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
