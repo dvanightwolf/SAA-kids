@@ -35,7 +35,7 @@ class Day(models.Model):
 class Photo(models.Model):
     workshop = models.ForeignKey(WorkShops, on_delete=models.CASCADE, null=False, blank=False)
     photo = models.ImageField(upload_to="workshops/", blank=True, null=False,
-                              default="workshops/default_activity_photo.jpg")
+                              default="workshops/default_workshops_photo.jpg")
 
     def __str__(self):
         return str(self.workshop)
