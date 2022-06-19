@@ -13,3 +13,6 @@ def show(request):
     context = {"workshops": workshops, "days": days, "photos": photos, "material": material}
     # Render show page and send the dictionary to it.
     return render(request, "show.html", context)
+
+
+
