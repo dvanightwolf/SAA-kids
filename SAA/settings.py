@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
-    'learnwithtyourkids.apps.LearnwithtyourkidsConfig',
+    'learnwithyourkids.apps.LearnwithyourkidsConfig',
     'activity.apps.ActivityConfig',
     'workshops.apps.WorkshopsConfig',
     'django.contrib.admin',
