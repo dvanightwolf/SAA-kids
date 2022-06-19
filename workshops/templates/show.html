@@ -8,7 +8,7 @@
 <body>
 {% for workshop in workshops %}
     {% if workshop.is_active %}
-        <div class="card center shadow-lg box">
+        <div>
         {% for photo in photos %}
             {% if photo.workshop == workshop %}
                 <div class="right">
