@@ -28,7 +28,8 @@
             <p>{{ day.description }}</p>
             <p>{{ day.location }}</p>
         {% endfor %}
-            <a href="{{ workshop.form_url }}"><input type="button" value="submit"></a>
+        <a href="{{ workshop.form_url }}"><input type="button" value="submit"></a>
+        <a href="{{ workshop.details_url }}"><input type="button" value="Details"></a>
         <p>{{ workshop.min_required_age }}</p>
         <p>{{ workshop.max_required_age }}</p>
         </div>

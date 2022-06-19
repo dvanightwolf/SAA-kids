@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 # Create your models here.
@@ -15,6 +16,9 @@ class WorkShops(models.Model):
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    def details_url(self):
+        return reverse("workshops:details", args=[self.pk])
 
     def __str__(self):
         return self.title + "_" + str(self.start_date)
