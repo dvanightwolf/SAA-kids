@@ -4,7 +4,8 @@ from django.urls import reverse
 
 # Create your models here.
 class WorkShops(models.Model):
-    title = models.CharField(max_length=255, null=False)
+    title = models.CharField(max_length=255, null=False, blank=False)
+    slug = models.SlugField(max_length=255)
     location = models.CharField(null=True, blank=False, max_length=400)
     start_date = models.DateField(null=False, blank=False)
     end_date = models.DateField(null=False, blank=False)
