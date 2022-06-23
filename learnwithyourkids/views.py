@@ -1,22 +1,38 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from .models import LearnWithYourKids
+from django.db.models import Q
+from taggit.models import Tag
 
 
-def show(request):
-    """Show all learn."""
-    # Get all learn.
-    learn = LearnWithYourKids.objects.all()
-    # Put the info in a dictionary.
-    context = {"learn": learn}
-    # Render show page and send the dictionary to it.
-    return render(request, "show.html", context)
+def search(request):
+    results = []
+    tags = Tag.objects.all()
+    tag = Tag()
+    query = None
+    if request.method == 'GET':
+        query = request.GET.get('search')
+        tag_id = request.GET.get('tag', 'None')
+        if tag:
+            tag = Tag.objects.filter(pk=tag_id)
+        if query != '':
+            if LearnWithYourKids.objects.filter(Q(tags__name=query)):
+                results = LearnWithYourKids.objects.filter(Q(tags__name=query))
+            else:
+                results = LearnWithYourKids.objects.filter(Q(title__icontains=query) |
+                                                           Q(description__icontains=query))
+        elif query == '' or tag == "0":
+            results = LearnWithYourKids.objects.all()
+
+        if tag_id != '0':
+            results = results.filter(Q(tags__name=tag[0].name))
+
+    return render(request, 'LWYK.html', {'LWYK': results, 'tags': tags})
 
 
-def details(request, learn_id):
-    """Show workshop details."""
-    # Get learn by id.
-    learn = get_object_or_404(LearnWithYourKids, pk=learn_id)
-    # Put the info in a dictionary.
-    context = {"learn": learn}
-    # Render details page and send the dictionary to it.
-    return render(request, "details.html", context)
+def display(request):
+    LWYK = LearnWithYourKids.objects.all().order_by('-id')
+    tags = Tag.objects.all()
+    context = {'LWYK': LWYK,'tags':tags}
+    return render(request, 'LWYK.html', context)
+
+

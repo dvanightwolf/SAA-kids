@@ -5,7 +5,7 @@ from .models import LearnWithYourKids
 # Register your models here.
 @admin.register(LearnWithYourKids)
 class LearnWithYourKidsAdmin(admin.ModelAdmin):
-    list_display = ["title", "description", "url", "photo"]
+    list_display = ["title", "description", 'tags', "url", "photo"]
     search_fields = ("title",)
     ordering = ("title",)
-    add_form_template = "talon.html"
+

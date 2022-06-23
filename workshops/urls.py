@@ -4,6 +4,6 @@ app_name = "workshops"
 
 urlpatterns = [
     path('', views.show, name="show"),
-    path('details/<workshop_id>/', views.details, name="details"),
+    path('<workshop_id>/<slug:slug>', views.details, name="details"),
 
 ]

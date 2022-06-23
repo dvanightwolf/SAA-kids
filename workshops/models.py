@@ -1,11 +1,12 @@
 from django.db import models
 from django.urls import reverse
-
+from taggit.managers import TaggableManager
 
 # Create your models here.
 class WorkShops(models.Model):
-    title = models.CharField(max_length=255, null=False, blank=False)
-    slug = models.SlugField(max_length=255)
+    title = models.CharField(max_length=256, null=False)
+    slug = models.SlugField(max_length=256)
+    tags = TaggableManager()
     location = models.CharField(null=True, blank=False, max_length=400)
     start_date = models.DateField(null=False, blank=False)
     end_date = models.DateField(null=False, blank=False)
@@ -18,12 +19,11 @@ class WorkShops(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    def details_url(self):
-        return reverse("workshops:details", args=[self.pk])
-
     def __str__(self):
         return self.title + "_" + str(self.start_date)
 
+    def get_url(self):
+        return reverse('workshops:details', args=[self.id, self.slug])
 
 class Day(models.Model):
     workshop = models.ForeignKey(WorkShops, on_delete=models.CASCADE, null=False, blank=False)

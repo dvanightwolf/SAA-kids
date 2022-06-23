@@ -17,7 +17,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 from django.contrib import admin
-from account.views import base
+from account.views import base, no_page_found
+from django.conf.urls import handler404
 
 urlpatterns = [
     path('', base, name="home"),
@@ -28,3 +29,4 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+handler404 = no_page_found

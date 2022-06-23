@@ -1,11 +1,12 @@
 from django.db import models
+from django.urls import reverse
+from taggit.managers import TaggableManager
 
 
-# Create your models here.
 class Activity(models.Model):
-    title = models.CharField(max_length=255, null=False)
-    photo = models.ImageField(upload_to="activity/", blank=True, null=False,
-                              default="activity/default_activity_photo.jpg")
+    title = models.CharField(max_length=256, null=False)
+    slug = models.SlugField(max_length=256)
+    tags = TaggableManager()
     date = models.DateField(null=False, blank=False)
     start_time = models.TimeField(null=False, blank=False)
     end_time = models.TimeField(null=False, blank=False)
@@ -22,6 +23,9 @@ class Activity(models.Model):
     def __str__(self):
         return self.title + str(self.date)
 
+    def get_url(self):
+        return reverse('activity:activity_details', args=[self.id, self.slug])
+
 
 class ActivityPhoto(models.Model):
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE, null=False)
@@ -29,6 +33,6 @@ class ActivityPhoto(models.Model):
                               default="activity/default_activity_photo.jpg")
 
     def __str__(self):
-        return self.activity
+        return str(self.activity)
 
 
