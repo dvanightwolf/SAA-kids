@@ -10,6 +10,8 @@ class WorkShops(models.Model):
     location = models.CharField(null=True, blank=False, max_length=400)
     start_date = models.DateField(null=False, blank=False)
     end_date = models.DateField(null=False, blank=False)
+    post_photo = models.ImageField(upload_to="workshops/", blank=True, null=False,
+                                   default="default_photo.jpg")
     min_required_age = models.IntegerField(null=False, blank=False)
     max_required_age = models.IntegerField(null=False, blank=False)
     form_url = models.URLField(null=False, blank=False)
@@ -39,8 +41,7 @@ class Day(models.Model):
 
 class Photo(models.Model):
     workshop = models.ForeignKey(WorkShops, on_delete=models.CASCADE, null=False, blank=False)
-    photo = models.ImageField(upload_to="workshops/", blank=True, null=False,
-                              default="workshops/default_workshops_photo.jpg")
+    photo = models.ImageField(upload_to="workshops/", blank=True, null=False)
 
     def __str__(self):
         return str(self.workshop)

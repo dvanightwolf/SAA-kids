@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+             <div>
+                 <ul><li>created:{{ activity.created }}updated:{{activity.updated}}</li>
+                     <li> title: {{activity.title }}</li>
+                     <li> tags:{% for tag in activity.tags.all %}
+                            {{tag.name}}
+                         {% endfor %}
+                     </li>
+                     <li>max age: {{ activity.max_required_age }}</li>
+                     <li>min age: {{ activity.min_required_age }}</li>
+                     <li>date: {{ activity.date }}</li>
+                     <li>start time: {{ activity.start_time }}</li>
+                     <li>end time: {{ activity.end_time }}</li>
+                     <li>description: {{ activity.description }}</li>
+                     <li>location:{{ activity.location }}</li>
+                     <li>Reservation: {{ activity.form_url }}</li>
+                     <li>not!!: {{ activity.note }}</li>
+
+           </ul>
+                 {% for i in photos %}
+                 <img src="{{ i.photo.url }}" width="200" height="200" alt="">
+                 {% endfor %}
+            </div>
+
+
+</body>
+</html>
