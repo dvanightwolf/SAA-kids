@@ -30,6 +30,5 @@ def save_comment(request, article_id):
     return render(request, "add_comment.html", context)
 
 
-
 def no_page_found(request, exception):
     return render(request, 'no_page_found.html')

@@ -10,6 +10,8 @@ class Activity(models.Model):
     date = models.DateField(null=False, blank=False)
     start_time = models.TimeField(null=False, blank=False)
     end_time = models.TimeField(null=False, blank=False)
+    post_photo = models.ImageField(upload_to="activity/", blank=True, null=False,
+                                   default="default_photo.jpg")
     location = models.CharField(null=False, blank=False, max_length=400)
     min_required_age = models.IntegerField(null=False, blank=False)
     max_required_age = models.IntegerField(null=False, blank=False)
@@ -29,8 +31,7 @@ class Activity(models.Model):
 
 class ActivityPhoto(models.Model):
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE, null=False)
-    photo = models.ImageField(upload_to="activity/", blank=True, null=False,
-                              default="activity/default_activity_photo.jpg")
+    photo = models.ImageField(upload_to="activity/", blank=True, null=False)
 
     def __str__(self):
         return str(self.activity)
