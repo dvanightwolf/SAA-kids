@@ -6,6 +6,7 @@ from taggit.models import Tag
 
 def search(request):
     results = []
+    lwyks_list = LearnWithYourKids.objects.all().order_by('-id')
     tags = Tag.objects.all()
     tag = Tag()
     query = None
@@ -26,13 +27,14 @@ def search(request):
         if tag_id != '0':
             results = results.filter(Q(tags__name=tag[0].name))
 
-    return render(request, 'LWYK.html', {'LWYK': results, 'tags': tags})
+    return render(request, 'LWYK_show.html', {'lwyks': results, 'tags': tags, 'list': lwyks_list})
 
 
-def display(request):
-    LWYK = LearnWithYourKids.objects.all().order_by('-id')
+def show(request):
+    lwyks = LearnWithYourKids.objects.all().order_by('-id')
+    lwyks_list = LearnWithYourKids.objects.all().order_by('-id')
     tags = Tag.objects.all()
-    context = {'LWYK': LWYK,'tags':tags}
-    return render(request, 'LWYK.html', context)
+    context = {'lwyks': lwyks, 'tags': tags, 'list': lwyks_list}
+    return render(request, 'LWYK_show.html', context)
 
 

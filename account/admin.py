@@ -11,6 +11,7 @@ class RegisterAdmin(admin.ModelAdmin):
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ["title", "slug", "first_article", "video_url"]
+    prepopulated_fields = {'slug': ('title',)}
 
 
 @admin.register(Comment)

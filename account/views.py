@@ -1,34 +1,33 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Article, Comment
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Article, Comment, Profile
 from .forms import CommentForm
-import schedule
 
 
 def base(request):
     """Base page render."""
     articles = Article.objects.all()
     context = {"articles": articles}
-    return render(request, "base.html", context)
+    return render(request, "home.html", context)
 
 
-def article_details(request, article_id):
-    article = get_object_or_404(Article, pk=article_id)
+def article_details(request, article_id, slug):
+    article = get_object_or_404(Article, pk=article_id, slug=slug)
     comments = Comment.objects.filter(article=article)
-    context = {"article": article, "comments": comments}
-    return render(request, 'article_details.html', context)
-
-
-def save_comment(request, article_id):
+    user = Profile()
+    users = Profile.objects.all()
+    for u in users:
+        user = u
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
             new_form = form.save(commit=False)
             new_form.article = get_object_or_404(Article, pk=article_id)
             new_form.save()
+            return redirect("home")
     else:
         form = CommentForm()
-    context = {"form": form}
-    return render(request, "add_comment.html", context)
+    context = {"article": article, "comments": comments, "user": user, "form": form}
+    return render(request, 'article_details.html', context)
 
 
 def no_page_found(request, exception):

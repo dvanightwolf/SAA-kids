@@ -17,11 +17,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 from django.contrib import admin
-from account.views import base, no_page_found
+from account.views import base, no_page_found, article_details
 from django.conf.urls import handler404
 
 urlpatterns = [
     path('', base, name="home"),
+    path('article-details/<article_id>/<slug:slug>/', article_details, name="article_details"),
     path('admin/', admin.site.urls),
     path('workshops/', include('workshops.urls')),
     path('learn-with-your-kids/', include('learnwithyourkids.urls')),
