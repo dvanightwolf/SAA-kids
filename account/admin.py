@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Article, Comment
+from .models import Profile, Article, Comment, ArticleContent
 
 
 # Register the profile model to the admin site
@@ -10,10 +10,15 @@ class RegisterAdmin(admin.ModelAdmin):
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ["title", "slug", "first_article", "video_url"]
+    list_display = ["title", "slug", "video_url"]
     prepopulated_fields = {'slug': ('title',)}
+
+
+@admin.register(ArticleContent)
+class ArticleContentAdmin(admin.ModelAdmin):
+    list_display = ["article", "article_text", "photo"]
 
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ["article", "comment"]
+    list_display = ["article", "name", "comment"]

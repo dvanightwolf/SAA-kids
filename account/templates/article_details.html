@@ -9,18 +9,14 @@
 <body>
     <div class="card container shadow-lg">
         <h1>{{ article.title }}</h1>
-        <p>{{ article.first_article }}</p>
-        <div class="center">
-            <a href="{{ article.first_photo.url }}">
-                <img class="shadow-lg " src="{{ article.first_photo.url }}" width="1090" height="400">
-            </a>
-        </div>
-        <p>{{ article.last_article }}</p>
-        <div class="center">
-            <a href="{{ article.last_photo.url }}">
-                <img class="shadow-lg " src="{{ article.last_photo.url }}" width="1090" height="400">
-            </a>
-        </div>
+        {% for content in article_contents %}
+            <p>{{ content.article_text }}</p>
+            <div class="center">
+                <a href="{{ content.photo.url }}">
+                    <img class="shadow-lg " src="{{ content.photo.url }}" width="1090" height="400">
+                </a>
+            </div>
+        {% endfor %}
         <div>
             <iframe src="{{ article.video_url }}"></iframe>
         </div>
@@ -30,14 +26,18 @@
                 <h4>{{ user.username }}</h4>
             {% endif %}
             <div class="shadow-lg">
+                <h3>{{ comment.name }}</h3>
                 <p>{{ comment.comment }}</p>
             </div>
         {% endfor %}
         <br>
         <form method="POST" class="card shadow-lg">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Submit</button>
+            <h4>username</h4>
+            <p>{{ form.name }}</p>
+            <h4>comment</h4>
+            <p>{{ form.comment }}</p>
+            <button type="submit">Add comment</button>
         </form>
     </div>
 </body>

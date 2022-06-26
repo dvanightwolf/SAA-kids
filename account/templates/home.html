@@ -10,12 +10,10 @@
     {% for article in articles %}
         <div class="card container shadow-lg">
             <h1>{{ article.title }}</h1>
-            <p>{{ article.first_article }}</p>
-            <div class="center">
-                <a href="{{ article.first_photo.url }}">
-                    <img class="shadow-lg " src="{{ article.first_photo.url }}" width="1090" height="400">
-                </a>
-            </div>
+            <h4></h4>
+            {% for tag in article.tags.all %}
+                <p>{{ tag.name }}</p>
+            {% endfor %}
             <div>
                 <a href="{{ article.get_url }}">
                     <input class="btn btn-primary" type="button" value="More Details">

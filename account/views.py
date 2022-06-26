@@ -1,18 +1,20 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Article, Comment, Profile
+from .models import Article, ArticleContent, Comment, Profile
 from .forms import CommentForm
 
 
 def base(request):
     """Base page render."""
     articles = Article.objects.all()
+    article_contents = ArticleContent.objects.all()
     context = {"articles": articles}
     return render(request, "home.html", context)
 
 
 def article_details(request, article_id, slug):
     article = get_object_or_404(Article, pk=article_id, slug=slug)
-    comments = Comment.objects.filter(article=article)
+    comments = Comment.objects.filter(article=article).order_by('-id')
+    article_contents = ArticleContent.objects.filter(article=article)
     user = Profile()
     users = Profile.objects.all()
     for u in users:
@@ -26,7 +28,7 @@ def article_details(request, article_id, slug):
             return redirect("home")
     else:
         form = CommentForm()
-    context = {"article": article, "comments": comments, "user": user, "form": form}
+    context = {"article": article, "comments": comments, "user": user, "article_contents": article_contents, "form": form}
     return render(request, 'article_details.html', context)
 
 
