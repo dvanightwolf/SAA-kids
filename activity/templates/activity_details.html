@@ -5,10 +5,20 @@
     <title>Title</title>
 </head>
 <body>
-
-
-
+{% load my_tags  %}
              <div>
+              <div class="center">
+                <a href="{{ activity.post_photo.url }}">
+                    <img class="shadow-lg" src="{{ activity.post_photo.url }}" width="1090" height="400">
+                </a>
+            </div>
+             {% for photo in photos %}
+        <div>
+            <a href="{{ photo.photo.url}}">
+                <img class="shadow-lg " src="{{ photo.photo.url}}" width="250" height="250">
+            </a>
+        </div>
+    {% endfor %}
                  <ul><li>created:{{ activity.created }}updated:{{activity.updated}}</li>
                      <li> title: {{activity.title }}</li>
                      <li> tags:{% for tag in activity.tags.all %}

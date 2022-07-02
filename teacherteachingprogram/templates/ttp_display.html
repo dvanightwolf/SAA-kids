@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <title>Teacher Teaching Program</title>
 </head>
-<body>
+<body style="background-image: url('/ast/img/attack-on-titan-icegif-11.gif')">
 {% for t in ttp %}
     <div>
         <ul>
             <li><a href="{{ t.get_url }}">title{{t.title}}</a></li>
             <li>teacher grade:{{ t.teaching_grade}}</li>
             <li>{% for i in photos %}
-                {% if i.id == 1 %}
-                    <img src="{{ i.photo.url }}" width="200" height="200">
+                {% if i.ttp == t %}
+                        <img src="{{ i.photo.url }}" width="200" height="200">
                 {% endif %}
             {% endfor %}</li>
 

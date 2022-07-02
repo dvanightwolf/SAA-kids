@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from taggit.managers import TaggableManager
 
+
 # Create your models here.
 class WorkShops(models.Model):
     title = models.CharField(max_length=256, null=False)
@@ -26,6 +27,7 @@ class WorkShops(models.Model):
 
     def get_url(self):
         return reverse('workshops:details', args=[self.id, self.slug])
+
 
 class Day(models.Model):
     workshop = models.ForeignKey(WorkShops, on_delete=models.CASCADE, null=False, blank=False)

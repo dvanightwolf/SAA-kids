@@ -5,6 +5,10 @@ from .models import Activity, ActivityPhoto
 # Register the profile model to the admin site
 
 
+class ActivityPhotoAdmin(admin.StackedInline):
+    model = ActivityPhoto
+
+
 @admin.register(Activity)
 class ActivityAdmin(admin.ModelAdmin):
     list_display = ["id", "title", "description", 'tags', "note", "date", "start_time", "end_time", "min_required_age",
@@ -12,10 +16,4 @@ class ActivityAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     search_fields = ("title", "date")
     ordering = ("-date",)
-
-
-
-@admin.register(ActivityPhoto)
-class ActivityPhotoAdmin(admin.ModelAdmin):
-    list_display = ["activity", "photo"]
-    ordering = ("activity",)
+    inlines = [ActivityPhotoAdmin]

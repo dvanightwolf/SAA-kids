@@ -24,10 +24,13 @@ urlpatterns = [
     path('', base, name="home"),
     path('article-details/<article_id>/<slug:slug>/', article_details, name="article_details"),
     path('admin/', admin.site.urls),
-    path('workshops/', include('workshops.urls')),
+    path('workshops-and-activities/', include('workshops.urls')),
     path('learn-with-your-kids/', include('learnwithyourkids.urls')),
+    path('TTP/', include('teacherteachingprogram.urls')),
+    path('activities/', include('activity.urls')),
 
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.AST_URL, document_root=settings.AST_FILES)
 handler404 = no_page_found

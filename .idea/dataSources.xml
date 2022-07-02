@@ -9,5 +9,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://127.0.0.1:5432/db</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="db" uuid="3d9e66b7-0762-41ec-95e1-60dd3517edc3">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:F:\SAA-Kids\SAA\db.sqlite3</jdbc-url>
+    </data-source>
   </component>
 </project>

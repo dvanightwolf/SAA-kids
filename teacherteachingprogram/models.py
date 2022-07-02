@@ -9,8 +9,6 @@ class TTP(models.Model):
     tags = TaggableManager()
     start_date = models.DateField(null=False, blank=False)
     end_date = models.DateField(null=False, blank=False)
-    post_photo = models.ImageField(upload_to="TTP/", blank=True, null=False,
-                                   default="default_photo.jpg")
     teaching_grade = models.CharField(max_length=100)
     description = models.TextField()
     form_url = models.URLField(null=False, blank=False)
@@ -27,6 +25,9 @@ class TTP(models.Model):
     def get_url(self):
         return reverse('teacherteachingprogram:ttp_details', args=[self.id, self.slug])
 
+    def check_id(self):
+        return reverse('teacherteachingprogram:check_code', args=[self.id])
+
 
 class Day(models.Model):
     ttp = models.ForeignKey(TTP, on_delete=models.CASCADE, null=False, blank=False)
@@ -42,7 +43,8 @@ class Day(models.Model):
 
 class Photo(models.Model):
     ttp = models.ForeignKey(TTP, on_delete=models.CASCADE, null=False, blank=False)
-    photo = models.ImageField(upload_to="TTP/", blank=True, null=False)
+    photo = models.ImageField(upload_to="TTP/", blank=True, null=False,
+                              default="TTP/default_TTP_photo.jpg")
 
     def __str__(self):
         return str(self.ttp)

@@ -4,7 +4,33 @@
     <meta charset="UTF-8">
     <title>details</title>
 </head>
-<body>
+<body style="background-image: url('/ast/img/8fb4ba991ca1c384897de266eaa47de0_3587119585598152388.png'); background-repeat: no-repeat;background-size:cover ">
+        <h1>{{ ttp.title }}</h1>
+        {{ ttp.created }}/{{ ttp.updated }}
+        {{ ttp.description }}
+        {% for tag in ttp.tags.all %}
+        {{ tag.name }}
+        {% endfor %}
+        {{ ttp.location }}
+        {{ ttp.start_date }}
+        {{ ttp.end_date }}
+        {{ ttp.teaching_grade }}
+        {% for i in materials %}
+            {{ i.google_drive_url }}
+            {{ i.youtube_url }}
+        {% endfor %}
+
+        {% if ttp.lock %}
+        <form action="{{ ttp.get_url }}" method="post">
+            {% csrf_token %}
+            <input type="password" id="code" name="code" placeholder="please enter your code">
+            <button type="submit">check</button>
+        </form>
+        {% endif %}
+
+
+
+
 
 </body>
 </html>

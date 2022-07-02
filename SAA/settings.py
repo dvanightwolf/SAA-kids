@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['127.0.0.1']
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'learnwithyourkids.apps.LearnwithyourkidsConfig',
+    'teacherteachingprogram.apps.TeacherteachingprogramConfig',
     'activity.apps.ActivityConfig',
     'workshops.apps.WorkshopsConfig',
     'django.contrib.admin',
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'taggit',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -81,14 +83,14 @@ WSGI_APPLICATION = 'SAA.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db',
-        'USER': 'postgres',
-        'PASSWORD': '12345678',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': 'db',
+        # 'USER': 'postgres',
+        # 'PASSWORD': '12345678',
+        # 'HOST': 'localhost',
+        # 'PORT': '5432',
     }
 }
 
@@ -130,6 +132,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AST_URL = '/ast/'
+AST_FILES = os.path.join(BASE_DIR, 'ast/')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
