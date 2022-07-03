@@ -33,4 +33,6 @@ urlpatterns = [
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.AST_URL, document_root=settings.AST_FILES)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
 handler404 = no_page_found
