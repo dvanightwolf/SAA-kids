@@ -16,7 +16,7 @@ class MaterialAdmin(admin.StackedInline):
 
 @admin.register(TTP)
 class TeacherTeachingAdmin(admin.ModelAdmin):
-    list_display = ["id", "title", "description", "start_date", "end_date", "location",
+    list_display = ["title", "description", "start_date", "end_date", "location",
                     "form_url", "is_active", "created", "updated"]
     prepopulated_fields = {'slug': ('title',)}
     search_fields = ("title", "start_date")
