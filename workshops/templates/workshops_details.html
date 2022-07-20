@@ -5,32 +5,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+    </style>
 </head>
 <body>
-<div class="card box-flex shadow-lg center " style="padding: 10px">
+<div class="card box-flex shadow-lg center " style="padding: 10px; border-right: rgb(23,202,240) 5px solid;border-bottom: rgb(23,202,240) 5px solid;border-radius:30px;box-shadow: aliceblue 2px 4px 4px;">
     <div class="center">
         <a href="{{ workshop.post_photo.url}}">
-            <img class="shadow-lg " src="{{ workshop.post_photo.url}}" width="1090" height="400">
+            <img class="shadow-lg " src="{{ workshop.post_photo.url}}" width="100%" height="100%">
         </a>
     </div>
+<br>
+<div class="row">
     {% for photo in photos %}
-        <div>
+        <div class="col-sm-4">
             <a href="{{ photo.photo.url}}">
-                <img class="shadow-lg " src="{{ photo.photo.url}}" width="250" height="250">
+                <img class="shadow-lg " src="{{ photo.photo.url}}" width="100%" height="100%" style="border-radius: 40px;">
             </a>
         </div>
     {% endfor %}
-    <h1>{{ workshop.title }}</h1>
-    <p>description: {{ workshop.description }}</p>
-    <p>age: {{ workshop.min_required_age }} - {{ workshop.max_required_age }}</p>
-    <p>location: {{ workshop.location }}</p>
-    <p>workshop date: {{ workshop.start_date }} - {{ workshop.end_date }}</p>
-    <p>days details:</p>
+</div>
+<br>
+<div style="text-align: right">
+    <h1 style="text-align: center;color: #0a58ca" >{{ workshop.title }}</h1>
+    <br>
+    <p>الوصف: {{ workshop.description }}</p>
+    <p>العمر: {{ workshop.min_required_age }} - {{ workshop.max_required_age }}</p>
+    <p>الموقع: {{ workshop.location }}</p>
+    <p>{{ workshop.start_date }} - {{ workshop.end_date }} :تاريخ الورشة </p>
+    <p>تفاصيل الأيام</p>
     {% for day in days %}
         <p>------------</p>
         <p>{{ day.day }}: {{ day.start_time }} {{ day.end_time }}</p>
-        <p>day description: {{ day.description }}</p>
-        <p>location in this day: {{ day.location }}</p>
+        <p>وصف اليوم: {{ day.description }}</p>
+        <p>الموقع في هذا اليوم: {{ day.location }}</p>
         <p>------------</p>
     {% endfor %}
     {% for material in materials %}
@@ -45,14 +53,15 @@
             </a>
         </div>
     {% endfor %}
-    <p>note: {{ workshop.note }}</p>
+    <p style="color: red">الملاحظات: {{ workshop.note }}</p>
     <div>
-        <p style="align-self: end">to submit please check this form
-            <a href="{{ workshop.form_url }}">
-                <input class="btn btn-primary" type="button" value="Submit">
-            </a>
+        <p>للاشتراك الرجاء ضغط الزر و ملئ النموذج
         </p>
+        <a href="{{ workshop.form_url }}">
+                <input class="btn btn-primary" type="button" value="ارسال" style="border-radius: 50px;background-color: rgb(23,202,240);border: rgb(23,202,240) 1px solid">
+        </a>
     </div>
+</div>
 </div>
 </body>
 </html>

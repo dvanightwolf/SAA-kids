@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,42 +7,47 @@
     <title>Title</title>
 </head>
 <body>
-{% load my_tags  %}
-             <div>
+
+             <div style="background-color: white;border-right: magenta 5px solid;border-bottom: magenta 5px solid;padding: 25px;border-radius: 30px; box-shadow: gray 2px 2px 4px;text-align: right">
               <div class="center">
                 <a href="{{ activity.post_photo.url }}">
-                    <img class="shadow-lg" src="{{ activity.post_photo.url }}" width="1090" height="400">
+                    <img class="shadow-lg" src="{{ activity.post_photo.url }}" width="100%" height="100%">
                 </a>
             </div>
+             <br>
+             <div class="row">
              {% for photo in photos %}
-        <div>
+        <div class="col-sm-4">
             <a href="{{ photo.photo.url}}">
-                <img class="shadow-lg " src="{{ photo.photo.url}}" width="250" height="250">
+                <img class="shadow-lg " src="{{ photo.photo.url}}" width="100%" height="60%" style="border-radius: 40px">
             </a>
         </div>
     {% endfor %}
-                 <ul><li>created:{{ activity.created }}updated:{{activity.updated}}</li>
-                     <li> title: {{activity.title }}</li>
-                     <li> tags:{% for tag in activity.tags.all %}
+             <div>
+                 <p>created:{{ activity.created }}updated:{{activity.updated}}</p>
+                     <h1> title: {{activity.title }}</h1>
+                     <p> tags:{% for tag in activity.tags.all %}
                             {{tag.name}}
                          {% endfor %}
-                     </li>
-                     <li>max age: {{ activity.max_required_age }}</li>
-                     <li>min age: {{ activity.min_required_age }}</li>
-                     <li>date: {{ activity.date }}</li>
-                     <li>start time: {{ activity.start_time }}</li>
-                     <li>end time: {{ activity.end_time }}</li>
-                     <li>description: {{ activity.description }}</li>
-                     <li>location:{{ activity.location }}</li>
-                     <li>Reservation: {{ activity.form_url }}</li>
-                     <li>not!!: {{ activity.note }}</li>
+                     </p>
+                     <p>max age: {{ activity.max_required_age }}</p>
+                     <p>min age: {{ activity.min_required_age }}</p>
+                     <p>date: {{ activity.date }}</p>
+                     <p>start time: {{ activity.start_time }}</p>
+                     <p>end time: {{ activity.end_time }}</p>
+                     <p>description: {{ activity.description }}</p>
+                     <p>location:{{ activity.location }}</p>
+                     <p>Reservation: {{ activity.form_url }}</p>
+                     <p>not!!: {{ activity.note }}</p>
+                </div>
 
-           </ul>
-                 {% for i in photos %}
+                <!-- {% for i in photos %}
                  <img src="{{ i.photo.url }}" width="200" height="200" alt="">
-                 {% endfor %}
+                 {% endfor %}-->
+             </div>
             </div>
 
 
 </body>
 </html>
+{% endblock content %}

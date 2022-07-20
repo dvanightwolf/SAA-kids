@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>our scratch games</title>
+</head>
+<body>
+{% for i in result_list %}
+<div>
+    {{ i.id }}
+    {{ i.title }}
+    <img src="{{ i.img }}" width="200" height="200">
+    <a href="{{ i.get_url }}"><button>Play Now</button></a>
+</div>
+{% endfor %}
+</body>
+</html>

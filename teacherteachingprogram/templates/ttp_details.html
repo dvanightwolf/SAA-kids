@@ -19,13 +19,14 @@
             {{ i.google_drive_url }}
             {{ i.youtube_url }}
         {% endfor %}
-
+        {% if visible %}
         {% if ttp.lock %}
         <form action="{{ ttp.get_url }}" method="post">
             {% csrf_token %}
             <input type="password" id="code" name="code" placeholder="please enter your code">
             <button type="submit">check</button>
         </form>
+        {% endif %}
         {% endif %}
 
 

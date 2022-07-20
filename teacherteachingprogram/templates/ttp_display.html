@@ -4,7 +4,29 @@
     <meta charset="UTF-8">
     <title>Teacher Teaching Program</title>
 </head>
-<body style="background-image: url('/ast/img/attack-on-titan-icegif-11.gif')">
+{% load static %}
+<body style="background-image: url('/static/img/1 ‫(2)‬.jpg')">
+<form action="{% url 'teacherteachingprogram:search_ttp' %}"  method="get" style="display:inline-table">
+
+
+        <div>
+
+         <input name="search" type="search" id="search"  placeholder="search something" style="border-radius: 2%">
+
+            <select name="tag_id" id="tag_id">
+            <option value="0">None</option>
+                {% for tag in tags.all %}
+                    <option value="{{ tag.id }}">{{ tag.name }}</option>
+                {% endfor %}
+
+            </select>
+
+        <button type="submit">Search</button>
+         </div>
+    </form>
+
+
+
 {% for t in ttp %}
     <div>
         <ul>

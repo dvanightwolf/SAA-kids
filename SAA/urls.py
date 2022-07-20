@@ -28,6 +28,7 @@ urlpatterns = [
     path('learn-with-your-kids/', include('learnwithyourkids.urls')),
     path('TTP/', include('teacherteachingprogram.urls')),
     path('activities/', include('activity.urls')),
+    path('games/', include('games.urls')),
 
 ]
 

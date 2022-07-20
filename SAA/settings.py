@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'teacherteachingprogram.apps.TeacherteachingprogramConfig',
     'activity.apps.ActivityConfig',
     'workshops.apps.WorkshopsConfig',
+    'games.apps.GamesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
