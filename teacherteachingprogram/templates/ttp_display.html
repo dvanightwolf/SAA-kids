@@ -30,6 +30,7 @@
 {% for t in ttp %}
     <div>
         <ul>
+            <li><img src="{{ t.post_photo.url }}"></li>
             <li><a href="{{ t.get_url }}">title{{t.title}}</a></li>
             <li>teacher grade:{{ t.teaching_grade}}</li>
             <li>{% for i in photos %}

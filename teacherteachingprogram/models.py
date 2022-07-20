@@ -7,6 +7,8 @@ class TTP(models.Model):
     title = models.CharField(max_length=256, null=False, blank=False)
     slug = models.SlugField(max_length=256)
     tags = TaggableManager()
+    post_photo = models.ImageField(upload_to="TTP/", blank=False, null=False,
+                              default="TTP/default_TTP_photo.jpg")
     start_date = models.DateField(null=False, blank=False)
     end_date = models.DateField(null=False, blank=False)
     teaching_grade = models.CharField(max_length=100)
@@ -43,8 +45,7 @@ class Day(models.Model):
 
 class Photo(models.Model):
     ttp = models.ForeignKey(TTP, on_delete=models.CASCADE, null=False, blank=False)
-    photo = models.ImageField(upload_to="TTP/", blank=True, null=False,
-                              default="TTP/default_TTP_photo.jpg")
+    photo = models.ImageField(upload_to="TTP/", blank=True, null=False)
 
     def __str__(self):
         return str(self.ttp)
