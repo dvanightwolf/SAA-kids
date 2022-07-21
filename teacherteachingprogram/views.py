@@ -60,8 +60,6 @@ def ttp_details(request, ttp_id, ttp_slug):
             days = Day.objects.filter(ttp_id=ttp)
             photos = Photo.objects.filter(ttp_id=ttp)
             materials = Material.objects.filter(ttp_id=ttp)
-            context = {"ttp": ttp, 'days': days, "photos": photos, 'materials': materials,'visible':visible}
-            return render(request, 'ttp_details.html', context)
 
     context = {"ttp": ttp, 'days': days, "photos": photos, 'materials': materials,'visible':visible}
     return render(request, "ttp_details.html", context)

@@ -1,46 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Teacher Teaching Program</title>
+    <style>
+        h1{
+                font-family: doublebubble_shadowregular;
+                font-weight: normal;
+                font-style: normal;
+
+        }
+        .post:nth-child(even){
+            border-right: rgb(23,202,240) 5px solid;
+            border-bottom: rgb(23,202,240) 5px solid;
+        }
+        .post:nth-child(odd){
+            border-right:magenta 5px solid ;
+            border-bottom: magenta 5px solid;
+        }
+
+
+      /* div:nth-child(even){
+        border-right: orange 5px solid;border-top: orange 5px solid;
+
+       }*/
+    </style>
 </head>
-{% load static %}
-<body style="background-image: url('/static/img/1 ‫(2)‬.jpg')">
-<form action="{% url 'teacherteachingprogram:search_ttp' %}"  method="get" style="display:inline-table">
+<body style="background:#f2f2f2 " >
+<form data-aos="fade-down" data-aos-duration="2000" action="{% url 'teacherteachingprogram:search_ttp' %}"  method="get" class="shadow-lg card box container" style="padding: 25px; border-bottom: #c951f6 5px solid;border-top: #c951f6 5px solid ;border-radius: 30px;text-align: right">
 
 
-        <div>
+        <div >
+            <button type="submit"  style="border-radius: 50px; background: #67058b;border: #67058b 1px solid" class="btn btn-primary">بحث</button>
 
-         <input name="search" type="search" id="search"  placeholder="search something" style="border-radius: 2%">
 
-            <select name="tag_id" id="tag_id">
-            <option value="0">None</option>
+            <select name="tag_id" id="tag_id" style="border-radius: 50px; text-align: right">
+            <option value="0">لا شيء</option>
                 {% for tag in tags.all %}
                     <option value="{{ tag.id }}">{{ tag.name }}</option>
                 {% endfor %}
 
             </select>
+             <input name="search" type="search" id="search"  placeholder="ابحث" style="border-radius: 50px;text-align: right" >
 
-        <button type="submit">Search</button>
          </div>
     </form>
 
 
-
+<br>
 {% for t in ttp %}
-    <div>
-        <ul>
-            <li><img src="{{ t.post_photo.url }}"></li>
-            <li><a href="{{ t.get_url }}">title{{t.title}}</a></li>
-            <li>teacher grade:{{ t.teaching_grade}}</li>
-            <li>{% for i in photos %}
-                {% if i.ttp == t %}
-                        <img src="{{ i.photo.url }}" width="200" height="200">
-                {% endif %}
-            {% endfor %}</li>
-
-        </ul>
+    <div class="col-lg-6" style="min-height: 900px;text-align: right">
+    <div class="card container post" data-aos="fade-up"
+     data-aos-duration="3000"  style="padding: 25px;border-radius:30px;box-shadow: #f0f8ff 2px 4px 4px;height: 100% " >
+          <a href="{{ t.post_photo.url }}"> <img class="shadow-lg" src="{{ t.post_photo.url }}" width="100%" height="100%"></a>
+        <br>
+        <h1 style="margin-left: 40%;color: #09b6fe ;margin-bottom: 20px;">{{t.title}}</h1>
+         <p>تقيم المدرس: {{t.teaching_grade}}</p>
+        <div>
+            <a href="{{ t.get_url }}">
+                <input class="btn btn-primary" type="button" value="المحتوى" style="border-radius: 50px;background-color: rgb(23,202,240);border: rgb(23,202,240) 1px solid">
+            </a>
+        </div>
+    </div>
     </div>
 {% endfor %}
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
 </body>
 </html>
+{% endblock content %}
