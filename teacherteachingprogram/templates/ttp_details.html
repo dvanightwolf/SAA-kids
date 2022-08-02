@@ -1,25 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>details</title>
+    <title>تفاصيل التدريب</title>
 </head>
-<body>
-        <img src="{{ ttp.post_photo.url }}">
-        <h1>{{ ttp.title }}</h1>
-        {{ ttp.created }}/{{ ttp.updated }}
-        {{ ttp.description }}
+
+<div class="card box-flex shadow-lg center " style="padding: 10px; border-right: rgb(23,202,240) 5px solid;border-bottom: rgb(23,202,240) 5px solid;border-radius:30px;box-shadow: aliceblue 2px 4px 4px;">
+        <div class="center">
+            <a href="{{ ttp.post_photo.url }}">
+                <img class="shadow-lg" style="border-radius: 2%" src="{{ ttp.post_photo.url }}" width="100%" height="100%">
+            </a>
+        </div>
+<br>
+    <div class="row">
+    {% for photo in photos %}
+        <div class="col-sm-4">
+            <a href="{{ photo.photo.url}}">
+                <img class="shadow-lg " src="{{ photo.photo.url}}" width="100%" height="100%" style="border-radius: 40px;">
+            </a>
+        </div>
+    {% endfor %}
+</div>
+<br>
+<div style="text-align: right">
+        <h1 style="text-align: center;color: #0a58ca" >{{ ttp.title }}</h1>
+<br>
+
+        <p>الوصف: {{ ttp.description }}</p>
         {% for tag in ttp.tags.all %}
         {{ tag.name }}
         {% endfor %}
-        {{ ttp.location }}
-        {{ ttp.start_date }}
-        {{ ttp.end_date }}
-        {{ ttp.teaching_grade }}
-        {% for i in materials %}
-            {{ i.google_drive_url }}
-            {{ i.youtube_url }}
-        {% endfor %}
+        <p>الموقع: {{ ttp.location }}</p>
+        <p>{{ ttp.start_date }} - {{ ttp.end_date }} :تاريخ الورشة </p>
+        <p>تفاصيل الأيام</p>
+    {% for day in days %}
+        <p>------------</p>
+        <p>{{ day.day }}: {{ day.start_time }} {{ day.end_time }}</p>
+        <p>وصف اليوم: {{ day.description }}</p>
+        <p>الموقع في هذا اليوم: {{ day.location }}</p>
+        <p>------------</p>
+    {% endfor %}
+        <p>تقيم المدرس: {{ttp.teaching_grade}}</p>
+        {% for material in materials %}
+        <div>
+            <a href="{{ material.google_drive_url }}">
+                <input class="btn btn-primary" type="button" value="pdf">
+            </a>
+        </div>
+        <div>
+            <a href="{{ material.youtube_url }}">
+                <input class="btn btn-primary" type="button" value="youtube">
+            </a>
+        </div>
+    {% endfor %}
         {% if visible %}
         {% if ttp.lock %}
         <form action="{{ ttp.get_url }}" method="post">
@@ -29,10 +64,9 @@
         </form>
         {% endif %}
         {% endif %}
-
-
-
-
-
+    <p style="color: lightgreen">{{ ttp.created }}/{{ ttp.updated }}</p>
+</div>
+</div>
 </body>
 </html>
+{% endblock content %}

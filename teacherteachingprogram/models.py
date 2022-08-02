@@ -8,7 +8,7 @@ class TTP(models.Model):
     slug = models.SlugField(max_length=256)
     tags = TaggableManager()
     post_photo = models.ImageField(upload_to="TTP/", blank=False, null=False,
-                              default="TTP/default_TTP_photo.jpg")
+                                   default="TTP/default_TTP_photo.jpg")
     start_date = models.DateField(null=False, blank=False)
     end_date = models.DateField(null=False, blank=False)
     teaching_grade = models.CharField(max_length=100)
