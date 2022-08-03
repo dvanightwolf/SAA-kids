@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Article, Comment, ArticleContent
+from .models import Profile, Article, Comment, ArticleContent, Gallery
 
 
 # Register the profile model to the admin site
@@ -17,6 +17,11 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display = ["title", "slug", "video_url"]
     prepopulated_fields = {'slug': ('title',)}
     inlines = [ArticleContentAdmin]
+
+
+@admin.register(Gallery)
+class GalleryAdmin(admin.ModelAdmin):
+    list_display = ["title", "photo"]
 
 
 @admin.register(Comment)
