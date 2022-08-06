@@ -25,9 +25,6 @@ class Activity(models.Model):
     def __str__(self):
         return self.title + str(self.date)
 
-    def get_url_str(self):
-        return f'http://127.0.0.1:8000/activities/{self.id}/{self.slug}'
-
     def get_url(self):
         return reverse('activity:activity_details', args=[self.id, self.slug])
 

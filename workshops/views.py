@@ -15,7 +15,7 @@ def w_filler(workshop):
     dic['title'] = workshop.title
     dic['start'] = datetime.datetime.strptime(str(workshop.start_date), "%Y-%m-%d").strftime("%Y-%m-%d")
     dic['end'] = datetime.datetime.strptime(str(workshop.end_date), "%Y-%m-%d").strftime("%Y-%m-%d")
-    dic['url'] = workshop.get_url_str()
+    dic['url'] = workshop.get_url
     return dic
 
 
@@ -23,7 +23,7 @@ def a_filler(activity):
     dic = {}
     dic['title'] = activity.title
     dic['start'] = datetime.datetime.strptime(str(activity.date), "%Y-%m-%d").strftime("%Y-%m-%d")
-    dic['url'] = activity.get_url_str()
+    dic['url'] = activity.get_url
     return dic
 
 
@@ -88,7 +88,6 @@ def calender(request):
 
     for activity in Activity.objects.filter(is_active=True):
         content.append(a_filler(activity))
-    print(content)
     context = {'content': content}
     return render(request, "calender.html", context)
 

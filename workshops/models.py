@@ -28,9 +28,6 @@ class WorkShops(models.Model):
     def get_url(self):
         return reverse('workshops:details', args=[self.id, self.slug])
 
-    def get_url_str(self):
-        return f'http://127.0.0.1:8000/workshops-and-activities/{self.id}/{self.slug}'
-
 
 class Day(models.Model):
     workshop = models.ForeignKey(WorkShops, on_delete=models.CASCADE, null=False, blank=False)
