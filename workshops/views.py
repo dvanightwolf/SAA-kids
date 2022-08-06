@@ -1,4 +1,7 @@
 from django.shortcuts import render, get_object_or_404
+import json
+from django.http import JsonResponse
+from django.core.serializers import serialize
 from SAA.settings import STATIC_URL
 from activity.models import Activity, ActivityPhoto
 from .models import WorkShops, Day, Photo, Material
@@ -58,23 +61,25 @@ def search(request):
                                                                   'activity_photo': activity_photo, 's': STATIC_URL})
 
 
-def show(request):
+def calender(request):
     """List all workshops."""
     # Get all workshops.
-    workshops = WorkShops.objects.filter(is_active=True).order_by('-id')
+    content = []
+    for workshop in WorkShops.objects.all():
+        dic = {'title': f"'{workshop.title}'", 'start': f"'{workshop.start_date.year}-{workshop.start_date.month}-{workshop.start_date.day}'",
+               'end': f"'{workshop.end_date.year}-{workshop.end_date.month}-{workshop.end_date.day}'",
+               'url': f"'{workshop.get_url()}'"}
+        content.append(dic)
+    print(content)
+    content = WorkShops.objects.all()
     days = Day.objects.all().order_by('day')
-    photo = Photo.objects.all()
-    tags = Tag.objects.all()
     # Get all activities.
     activity = Activity.objects.filter(is_active=True).order_by('-id')
-    tags = Tag.objects.all()
-    photos = ActivityPhoto.objects.all()
-    context = {}
     # Put the info in a dictionary.
-    context = {"workshops": workshops, "days": days, "photo": photo, "tags": tags,
-               "activity": activity, "photos": photos}
+    context = {"content": content, "days": days,
+               "activity": activity}
     # Render show page and send the dictionary to it.
-    return render(request, "workshops_and_activities_show.html", context)
+    return render(request, "calender.html", context)
 
 
 def details(request, workshop_id, slug):
@@ -105,4 +110,4 @@ def archive(request):
     context = {"workshops": workshops, "days": days, "photo": photo, "tags": tags,
                "activity": activity, "photos": photos}
     # Render show page and send the dictionary to it.
-    return render(request, "archive_show.html", context)
+    return render(request, "workshops_and_activities_show.html", context)

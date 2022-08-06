@@ -41,6 +41,10 @@ class Comment(models.Model):
         return self.article.title + "__" + self.comment
 
 
+class Slide(models.Model):
+    photo = models.ImageField(upload_to="slide/", blank=False, null=False)
+
+
 class Gallery(models.Model):
     title = models.CharField(max_length=255, blank=False, null=False)
     photo = models.ImageField(upload_to="gallery/", blank=False, null=False)

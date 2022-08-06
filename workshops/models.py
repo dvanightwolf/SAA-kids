@@ -26,7 +26,7 @@ class WorkShops(models.Model):
         return self.title + "_" + str(self.start_date)
 
     def get_url(self):
-        return reverse('workshops:details', args=[self.id, self.slug])
+        return f'http://127.0.0.1:8000/workshops-and-activities/{self.id}/{self.slug}'
 
 
 class Day(models.Model):

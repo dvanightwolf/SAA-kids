@@ -1,14 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Article, ArticleContent, Comment, Profile, Gallery
+from .models import Article, ArticleContent, Comment, Profile, Gallery, Slide
 from .forms import CommentForm
 
 
 def base(request):
     """Base page render."""
     articles = Article.objects.all()
+    slide = Slide.objects.all()
     photos = Gallery.objects.all()
     article_contents = ArticleContent.objects.all()
-    context = {"articles": articles, "photos": photos}
+    context = {"articles": articles, "photos": photos, 'slide':slide}
     return render(request, "home.html", context)
 
 

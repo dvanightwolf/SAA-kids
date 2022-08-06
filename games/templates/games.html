@@ -1,17 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>our scratch games</title>
+
+
+
 </head>
-<body>
+<body onload="changeBackground();">
+<div class="row rotate">
 {% for i in result_list %}
-<div>
-    {{ i.id }}
-    {{ i.title }}
-    <img src="{{ i.img }}" width="200" height="200">
-    <a href="{{ i.get_url }}"><button>Play Now</button></a>
+<div id='d{{i.index}}' class="column " style="border: double #0c63e4;border-radius: 25px ;">
+    <h4 style="text-align: center"> {{ i.title }}</h4>
+    <a href="{{ i.get_url }}">
+    <center><img style="position: center  " class="w3-card" src="{{ i.img }}" width="200" height="200" alt="{{ i.title }}"></center>
+    </a>
+    <p>{{ i.description }}</p>
 </div>
+
 {% endfor %}
+
+</div>
+
+<script>
+          function changeBackground() {
+            var i=1;
+            for(i=1;i<=9;i++){
+            document.getElementById("d"+i).style.backgroundColor =
+ '#'+Math.floor(Math.random()*16777215).toString(16);
+            }
+        }
+        </script>
 </body>
 </html>
+{% endblock content %}

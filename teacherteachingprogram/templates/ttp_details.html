@@ -43,6 +43,7 @@
         <p>------------</p>
     {% endfor %}
         <p>تقيم المدرس: {{ttp.teaching_grade}}</p>
+{% if materials_show %}
         {% for material in materials %}
         <div>
             <a href="{{ material.google_drive_url }}">
@@ -55,6 +56,7 @@
             </a>
         </div>
     {% endfor %}
+{% endif %}
         {% if visible %}
         {% if ttp.lock %}
         <form action="{{ ttp.get_url }}" method="post">
