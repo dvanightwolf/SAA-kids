@@ -76,10 +76,9 @@ def calender(request):
     # Get all activities.
     activity = Activity.objects.filter(is_active=True).order_by('-id')
     # Put the info in a dictionary.
-    context = {"content": content, "days": days,
-               "activity": activity}
+
     # Render show page and send the dictionary to it.
-    return render(request, "calender.html", context)
+    return render(request, "calender.html")
 
 
 def details(request, workshop_id, slug):
