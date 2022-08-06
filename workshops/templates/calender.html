@@ -2,6 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+      {% load static %}
+      <link href='{% static 'admin/full/main.css' %}' rel='stylesheet' />
+    <script src='{% static 'admin/full/main.js' %}'></script>
 	    <style>
 
     html, body {
@@ -16,9 +19,8 @@
       margin: 40px auto;
     }
 	  </style>
+      {% autoescape off %}
 
-    <link href="../../ast/fullcalendar/main.css" rel='stylesheet' />
-    <script src="../../ast/fullcalendar/main.js"></script>
     <script>
 
  document.addEventListener('DOMContentLoaded', function() {
@@ -32,18 +34,26 @@
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
       events: [
-        {
-          title: 'All Day Event',
-          start: '2022-08-01',
-        }
+          {% for ele in content %}
+              {
+                  title: '{{ ele.title }}',
+                  start: '{{ ele.start }}',
+              {% if ele.end %}
+                  end: '{{ ele.end }}',
+              {% endif %}
+                  url: '{{ ele.url }}'
+              },
+          {% endfor %}
       ]
     });
 
     calendar.render();
   });
+
     </script>
+      {% endautoescape %}
   </head>
-  <body style="background-image: url('/ast/img/8fb4ba991ca1c384897de266eaa47de0_3587119585598152388.png')">
+  <body>
     <div id='calendar'></div>
   </body>
 </html>

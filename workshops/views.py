@@ -7,6 +7,24 @@ from activity.models import Activity, ActivityPhoto
 from .models import WorkShops, Day, Photo, Material
 from taggit.models import Tag
 from django.db.models import Q
+import datetime
+
+
+def w_filler(workshop):
+    dic = {}
+    dic['title'] = workshop.title
+    dic['start'] = datetime.datetime.strptime(str(workshop.start_date), "%Y-%m-%d").strftime("%Y-%m-%d")
+    dic['end'] = datetime.datetime.strptime(str(workshop.end_date), "%Y-%m-%d").strftime("%Y-%m-%d")
+    dic['url'] = workshop.get_url_str()
+    return dic
+
+
+def a_filler(activity):
+    dic = {}
+    dic['title'] = activity.title
+    dic['start'] = datetime.datetime.strptime(str(activity.date), "%Y-%m-%d").strftime("%Y-%m-%d")
+    dic['url'] = activity.get_url_str()
+    return dic
 
 
 def search(request):
@@ -63,27 +81,21 @@ def search(request):
 
 def calender(request):
     """List all workshops."""
-    # Get all workshops.
     content = []
-    for workshop in WorkShops.objects.all():
-        dic = {'title': f"'{workshop.title}'", 'start': f"'{workshop.start_date.year}-{workshop.start_date.month}-{workshop.start_date.day}'",
-               'end': f"'{workshop.end_date.year}-{workshop.end_date.month}-{workshop.end_date.day}'",
-               'url': f"'{workshop.get_url()}'"}
-        content.append(dic)
-    print(content)
-    content = WorkShops.objects.all()
-    days = Day.objects.all().order_by('day')
-    # Get all activities.
-    activity = Activity.objects.filter(is_active=True).order_by('-id')
-    # Put the info in a dictionary.
 
-    # Render show page and send the dictionary to it.
-    return render(request, "calender.html")
+    for workshop in WorkShops.objects.filter(is_active=True):
+        content.append(w_filler(workshop))
+
+    for activity in Activity.objects.filter(is_active=True):
+        content.append(a_filler(activity))
+    print(content)
+    context = {'content': content}
+    return render(request, "calender.html", context)
 
 
 def details(request, workshop_id, slug):
-    """Show workshop details."""
-    # Get workshop by id.
+    """Show activity details."""
+    # Get activity by id.
     workshop = get_object_or_404(WorkShops, pk=workshop_id, slug=slug)
     days = Day.objects.filter(workshop=workshop)
     photos = Photo.objects.filter(workshop=workshop)

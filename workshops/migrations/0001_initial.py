@@ -40,7 +40,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('photo', models.ImageField(blank=True, upload_to='workshops/')),
-                ('workshop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='workshops.workshops')),
+                ('activity', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='workshops.workshops')),
             ],
         ),
         migrations.CreateModel(
@@ -49,7 +49,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('google_drive_url', models.URLField()),
                 ('youtube_url', models.URLField()),
-                ('workshop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='workshops.workshops')),
+                ('activity', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='workshops.workshops')),
             ],
         ),
         migrations.CreateModel(
@@ -61,7 +61,7 @@ class Migration(migrations.Migration):
                 ('end_time', models.TimeField()),
                 ('location', models.CharField(max_length=400, null=True)),
                 ('description', models.TextField(null=True)),
-                ('workshop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='workshops.workshops')),
+                ('activity', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='workshops.workshops')),
             ],
         ),
     ]
