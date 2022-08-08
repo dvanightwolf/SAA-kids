@@ -74,9 +74,8 @@ def search(request):
         elif start_date:
             activities = activities.filter(date=start_date)
 
-    return render(request, 'workshops_and_activities_show.html', {'workshops': workshops, 'tags': tags,
-                                                                  'photos': photos, 'activity': activities,
-                                                                  'activity_photo': activity_photo, 's': STATIC_URL})
+    return render(request, 'workshops_and_activities_show.html', {'workshops': workshops,
+                                                                  'activity': activities})
 
 
 def calender(request):
@@ -117,7 +116,7 @@ def archive(request):
     photos = ActivityPhoto.objects.all()
     context = {}
     # Put the info in a dictionary.
-    context = {"workshops": workshops, "days": days, "photo": photo, "tags": tags,
-               "activity": activity, "photos": photos}
+    context = {"workshops": workshops,
+               "activity": activity}
     # Render show page and send the dictionary to it.
     return render(request, "workshops_and_activities_show.html", context)

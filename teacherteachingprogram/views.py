@@ -52,38 +52,20 @@ def ttp_details(request, ttp_id, ttp_slug):
     ttp = get_object_or_404(TTP, pk=ttp_id, slug=ttp_slug)
     days = Day.objects.filter(ttp_id=ttp)
     photos = Photo.objects.filter(ttp_id=ttp)
-    materials = Material.objects.filter(ttp_id=ttp)
+    materials = Material()
     materials_show = False
-    if not ttp.lock:
-        materials_show = True
     visible = True
+    if not ttp.lock:
+        materials = Material.objects.filter(ttp_id=ttp)
+        materials_show = True
+        visible = False
     if request.method == "POST":
         code = request.POST.get('code')
         if code == ttp.material_password:
             visible = False
-            days = Day.objects.filter(ttp_id=ttp)
-            photos = Photo.objects.filter(ttp_id=ttp)
+            materials_show = True
             materials = Material.objects.filter(ttp_id=ttp)
 
-    context = {"ttp": ttp, 'days': days, "photos": photos, 'materials_show': materials_show, 'materials': materials, 'visible': visible}
+    context = {"ttp": ttp, 'days': days, "photos": photos, 'materials_show': materials_show,
+               'materials': materials, 'visible': visible}
     return render(request, "ttp_details.html", context)
-
-
-def check(request, ttp_id):
-
-    materials = Material()
-    materials_show = True
-    if request.method == 'GET':
-
-        code_field = request.GET.get('code')
-
-        ttp = get_object_or_404(TTP, pk=ttp_id)
-        if ttp.material_password == code_field:
-
-            materials = Material.objects.filter(ttp_id=ttp)
-    return render(request, "ttp_details.html", {'materials_show': materials_show, 'materials': materials})
-
-
-
-
-

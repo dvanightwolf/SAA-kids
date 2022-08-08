@@ -21,7 +21,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
-    list_display = ["title", "photo"]
+    list_display = ["id", "sun_photo", "moon_photo"]
 
 
 @admin.register(Comment)
@@ -31,4 +31,4 @@ class CommentAdmin(admin.ModelAdmin):
 
 @admin.register(Slide)
 class SlideAdmin(admin.ModelAdmin):
-    list_display = ["id", "photo"]
+    list_display = ["id", "photo_1", "photo_2", "photo_3", "photo_4"]

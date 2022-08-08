@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,15 +43,21 @@
               {% if ele.end %}
                   end: '{{ ele.end }}',
               {% endif %}
-                  url: '{{ ele.url }}'
+                  url: '{{ ele.url }}',
+                  talon: 'damascus'
+
               },
           {% endfor %}
+          {
+              title: 'mk',
+              start: '2022-08-12',
+              talon: 'allepo'
+          }
       ]
     });
 
     calendar.render();
   });
-
     </script>
       {% endautoescape %}
   </head>
@@ -57,3 +65,4 @@
     <div id='calendar'></div>
   </body>
 </html>
+{% endblock content %}

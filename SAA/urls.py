@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from django.contrib import admin
 from account.views import base, no_page_found, article_details
-from django.conf.urls import handler404
+from django.conf.urls import handler404, handler403, handler500, handler400
 
 urlpatterns = [
     path('', base, name="home"),
@@ -37,3 +37,6 @@ urlpatterns += static(settings.AST_URL, document_root=settings.AST_FILES)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 handler404 = no_page_found
+handler403 = no_page_found
+handler400 = no_page_found
+#handler500 = no_page_found

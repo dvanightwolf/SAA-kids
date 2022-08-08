@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!--<script src="https://kit.fontawesome.com/d26b7c3f6e.js" crossorigin="anonymous"></script>-->
+
+    <meta charset="UTF-8">
+    <title>Articles</title>
+
+    <style>
+        h1{
+                font-family: doublebubble_shadowregular;
+                font-weight: normal;
+                font-style: normal;
+
+        }
+        .post:nth-child(even){
+            border-right: rgb(23,202,240) 5px solid;
+            border-bottom: rgb(23,202,240) 5px solid;
+        }
+        .post:nth-child(odd){
+            border-right:magenta 5px solid ;
+            border-bottom: magenta 5px solid;
+        }
+
+
+      /* div:nth-child(even){
+        border-right: orange 5px solid;border-top: orange 5px solid;
+
+       }*/
+    </style>
+</head>
+<body onload="changeBackground()">
+<form data-aos="fade-down" data-aos-duration="2000"  action="{% url 'learnwithyourkids:search' %}" method="get" class="shadow-lg card box container" style="padding: 25px; border-bottom: #c951f6 5px solid;border-top: #c951f6 5px solid ;border-radius: 30px;text-align: right">
+     <div>
+         <input list="b" name="search" type="search" id="search"  placeholder="ابحث" style="border-radius: 50px;text-align: right">
+             <datalist id="b">
+                 {% for art in articles %}
+                     <option value="{{ art.title }}">
+                 {% endfor %}
+             </datalist>
+        <select  name="tag" id="tag" style="border-radius: 50px;">
+            <option value="0">لا شيئ</option>
+            {% for tag in tags%}
+                <option value="{{ tag.id }}">{{ tag.name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" style="border-radius: 50px; background: #67058b;border: #67058b 1px solid"class="btn btn-primary">بحث</button>
+     </div>
+</form>
+<div class="row">
+    {% for article in articles %}
+        <div class="col-lg-6" style="min-height: 900px;text-align: right">
+        <br>
+    <div class="card container post" data-aos="fade-up"
+     data-aos-duration="3000"  style="padding: 25px;border-radius:30px;box-shadow: aliceblue 2px 4px 4px;height: 100% " >
+     <div class="center">
+            <a href="{{ article.photo.url }}">
+                <img class="shadow-lg " src="{{ article.post_photo.url }}" width="100%" height="100%">
+            </a>
+        </div>
+     <br>
+        <div>
+        <h1 style="margin-left: 40%;color: #09b6fe ;margin-bottom: 20px;">{{ article.title }}</h1>
+        <!--hotbink-->
+        <hr>
+        {% for tag in article.tags.all %}
+            <p style="color: blue;">{{ tag.name }}</p>
+        {% endfor %}
+        </div>
+        <div>
+            <a href="{{ article.get_url }}">
+                <input class="btn btn-primary" type="button" value="المحتوى" style="border-radius: 50px;background-color: rgb(23,202,240);border: rgb(23,202,240) 1px solid">
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+</body>
+</html>
+{% endblock content %}

@@ -28,7 +28,7 @@ class TTP(models.Model):
         return reverse('teacherteachingprogram:ttp_details', args=[self.id, self.slug])
 
     def check_id(self):
-        return reverse('teacherteachingprogram:check_code', args=[self.id])
+        return reverse('teacherteachingprogram:check_code', args=[self.id, self.slug])
 
 
 class Day(models.Model):

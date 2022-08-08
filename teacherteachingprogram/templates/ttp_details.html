@@ -34,15 +34,16 @@
         {% endfor %}
         <p>الموقع: {{ ttp.location }}</p>
         <p>{{ ttp.start_date }} - {{ ttp.end_date }} :تاريخ الورشة </p>
+        <hr>
         <p>تفاصيل الأيام</p>
     {% for day in days %}
-        <p>------------</p>
         <p>{{ day.day }}: {{ day.start_time }} {{ day.end_time }}</p>
         <p>وصف اليوم: {{ day.description }}</p>
         <p>الموقع في هذا اليوم: {{ day.location }}</p>
         <p>------------</p>
     {% endfor %}
-        <p>تقيم المدرس: {{ttp.teaching_grade}}</p>
+<hr>
+        <p>اساتذة المرحلة: {{ttp.teaching_grade}}</p>
 {% if materials_show %}
         {% for material in materials %}
         <div>
@@ -59,10 +60,11 @@
 {% endif %}
         {% if visible %}
         {% if ttp.lock %}
-        <form action="{{ ttp.get_url }}" method="post">
+        <form action="{{ ttp.check_id }}" method="post">
             {% csrf_token %}
-            <input type="password" id="code" name="code" placeholder="please enter your code">
-            <button type="submit">check</button>
+            <button type="submit" style="border-radius: 30px;background-color: pink;color: white;border: 2px cyan solid">تحقق</button><input type="password" id="code" name="code" placeholder="ادخل الرقم السري" style="text-align: right;border-radius: 30px;">
+
+
         </form>
         {% endif %}
         {% endif %}
