@@ -42,19 +42,23 @@ def base(request):
     """Base page render."""
     article_list = []
     articles = Article.objects.all()
-    slide = Slide.objects.first()
+    slide = None
+    for s in Slide.objects.all():
+        slide = s
+        break
     slide_photo_1 = None
     slide_photo_2 = None
     slide_photo_3 = None
     slide_photo_4 = None
     if slide:
-        slide_photo_1 = slide.photo_1
-        slide_photo_2 = slide.photo_2
-        slide_photo_3 = slide.photo_3
-        slide_photo_4 = slide.photo_4
-
-    photo = Gallery.objects.first()
-
+        slide_photo_1 = slide.photo_1.url
+        slide_photo_2 = slide.photo_2.url
+        slide_photo_3 = slide.photo_3.url
+        slide_photo_4 = slide.photo_4.url
+    photo = None
+    for g in Gallery.objects.all():
+        photo = g
+        break
     index = 0
     for art in articles:
         index += 1
@@ -87,6 +91,9 @@ def article_details(request, article_id, slug):
                "user": user, "article_contents": article_contents, "form": form}
     return render(request, 'article_details.html', context)
 
+
+def contact(request):
+    return render(request, 'contact/contact.html')
 
 def no_page_found(request, exception):
     error_id = '404'

@@ -5,6 +5,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .reco{
+            width: 70px;
+            height: 30px;
+            background-color: magenta;
+            border: 1px magenta solid;
+            border-radius:30px ;
+            text-align: center;
+            color: white;
+            margin: 2px;
+        }
+    </style>
 </head>
 <body>
 
@@ -17,34 +29,39 @@
              <br>
              <div class="row">
              {% for photo in photos %}
-        <div class="col-sm-4">
+        <div class="col-sm-4" style="height: 250px">
             <a href="{{ photo.photo.url}}">
-                <img class="shadow-lg " src="{{ photo.photo.url}}" width="100%" height="60%" style="border-radius: 40px">
+                <img class="shadow-lg " src="{{ photo.photo.url}}" width="100%" height="80%" style="border-radius: 40px">
             </a>
         </div>
     {% endfor %}
+             </div>
              <div>
-                 <p>created:{{ activity.created }}updated:{{activity.updated}}</p>
-                     <h1> title: {{activity.title }}</h1>
-                     <p> tags:{% for tag in activity.tags.all %}
-                            {{tag.name}}
-                         {% endfor %}
-                     </p>
-                     <p>max age: {{ activity.max_required_age }}</p>
-                     <p>min age: {{ activity.min_required_age }}</p>
-                     <p>date: {{ activity.date }}</p>
-                     <p>start time: {{ activity.start_time }}</p>
-                     <p>end time: {{ activity.end_time }}</p>
-                     <p>description: {{ activity.description }}</p>
-                     <p>location:{{ activity.location }}</p>
-                     <p>Reservation: {{ activity.form_url }}</p>
-                     <p>not!!: {{ activity.note }}</p>
+
+                     <h1 style="color: magenta;text-align: center"> {{activity.title }}</h1>
+                 <br>
+
+                     <p>أعلى عمر مطلوب: {{ activity.max_required_age }}</p>
+                     <p>أقل عمر مطلوب: {{ activity.min_required_age }}</p>
+                     <p>التاريخ: {{ activity.date }}</p>
+                     <p> تاريخ البدء:{{ activity.start_time }}</p>
+                     <p>تاريخ النهاية: {{ activity.end_time }}</p>
+                     <p>الوصف : {{ activity.description }}</p>
+                     <p>الموقع:{{ activity.location }}</p>
+                     <p>الحجز: {{ activity.form_url }}</p>
+                     <p>ملاحظات: {{ activity.note }}</p>
                 </div>
 
                 <!-- {% for i in photos %}
                  <img src="{{ i.photo.url }}" width="200" height="200" alt="">
                  {% endfor %}-->
-             </div>
+                 <p>{{ activity.created }}  : أنشئ في</p>
+                 <p>{{activity.updated}} : تم تعديله في  </p>
+             <div class="row">
+                                  <p>{% for tag in activity.tags.all %}
+                        <div class="col-sm-1 reco"><p>{{tag.name}}</p></div>
+                         {% endfor %}
+                     </p>
             </div>
 
 

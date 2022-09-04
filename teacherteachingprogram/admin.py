@@ -24,4 +24,15 @@ class TeacherTeachingAdmin(admin.ModelAdmin):
     inlines = [DayAdmin, MaterialAdmin, PhotoAdmin]
 
 
+class TTPArticleContentAdmin(admin.StackedInline):
+    model = TTPArticleContent
+
+
+@admin.register(TTPArticle)
+class TTPArticleAdmin(admin.ModelAdmin):
+    list_display = ["title", "slug", "video_url"]
+    prepopulated_fields = {'slug': ('title',)}
+    inlines = [TTPArticleContentAdmin]
+
+
 

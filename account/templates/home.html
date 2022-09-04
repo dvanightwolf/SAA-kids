@@ -35,7 +35,7 @@
              min-height: 300px;
              max-height: 300px;
             transform: translateY(-150px);
-            transition-duration: 1s;
+            transition-duration: 2s;
             opacity: 0.4;
         }
         .move:hover h1{
@@ -113,7 +113,7 @@
     cursor:pointer;
     position: fixed;
     right: 20px;
-    top: 27%;
+    top: 40%;
     font-size: 18px;
 }
 #main1 {
@@ -168,6 +168,9 @@
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+        .cont{
+            height: 450px;
+        }
 
     </style>
 </head>
@@ -178,20 +181,19 @@
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active resize">
-      <img class="d-block carouselImg sliderCor" src="{{ slide_photo_1.url }}" alt="First slide">
+      <img class="d-block carouselImg sliderCor" src="{{ slide_photo_1 }}" alt="First slide">
     </div>
     <div class="carousel-item resize">
-      <img class="d-block carouselImg sliderCor" src="{{ slide_photo_2.url }}" alt="Second slide">
+      <img class="d-block carouselImg sliderCor" src="{{ slide_photo_2 }}" alt="Second slide">
     </div>
     <div class="carousel-item resize">
-      <img class="d-block carouselImg sliderCor" src="{{ slide_photo_3.url }}" alt="Third slide">
+      <img class="d-block carouselImg sliderCor" src="{{ slide_photo_3 }}" alt="Third slide">
     </div>
       <div class="carousel-item resize">
-      <img class="d-block carouselImg sliderCor" src="{{ slide_photo_4.url }}" alt="Third slide">
+      <img class="d-block carouselImg sliderCor" src="{{ slide_photo_4 }}" alt="Third slide">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -207,12 +209,7 @@
 <div class="row">
     {% for article in articles %}
         <div class="col-lg-4 cont">
-        <div class="card container shadow-lg artic">
-
-
-           <!-- {% for tag in article.tags.all %}
-                <p>{{ tag.name }}</p>
-            {% endfor %}-->
+        <div class="card container shadow-lg artic" id="d{{ article.Article.index }}" style="background-image: url('{{ article.Article.post_photo.url }}'); background-size: cover">
 
         </div>
         <a href="{{ article.get_url }}" style="text-decoration: none; color: black">
@@ -225,7 +222,7 @@
                 <br>
                 <br>
                 <div>
-            <h1 style="text-align: center;font-size: 24px">{{ article.title }}</h1>
+            <h1 style="text-align: center;font-size: 24px">{{ article.Article.title }}</h1>
                     </div>
         </div>
         </a>
@@ -239,8 +236,7 @@
 <!-- side nav -->
 <div id="mySidenav" class="sidenav shadow-lg" >
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
- <img src="../../ast/img/FullMoon2010.jpg" style="width: 200px;height: 200px;margin: auto">
-  <a href="http://google.com">Contact</a>
+ <img src="{{ photo.moon_photo.url }}" style="width: 200px;height: 200px;margin: auto">
 </div>
 <!--<span onclick="openNav()" id="main">&#9776;</span>-->
 <span onclick="openNav()" id="main"><img src="/ast/img/moon1.png" width="50px" height="50px" style="background: transparent"> </span>
@@ -248,9 +244,7 @@
 <!--sun-->
 <div id="mySidenav1" class="sidenav1 shadow-lg" >
   <a href="javascript:void(0)" class="closebtn1" onclick="closeNav1()">&times;</a>
- <img src="../../ast/img/full-sun.png" style="width: 200px;height: 200px;margin: auto">
-    <br>
-  <a href="http://google.com">Contact</a>
+ <img src="{{ photo.sun_photo.url }}" style="width: 200px;height: 200px;margin: auto">
 </div>
 <!--<span onclick="openNav()" id="main">&#9776;</span>-->
 <span onclick="openNav1()" id="main1"><img src="/ast/img/sun-1846(2).png" width="50px" height="50px"></span>

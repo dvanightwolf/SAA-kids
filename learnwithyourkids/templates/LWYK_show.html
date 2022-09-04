@@ -11,7 +11,7 @@
 
     <style>
         h1{
-                font-family: doublebubble_shadowregular;
+            font-family: doublebubble_shadowregular;
                 font-weight: normal;
                 font-style: normal;
 
@@ -32,7 +32,7 @@
        }*/
     </style>
 </head>
-<body>
+<bodys style="background:red " >
 
 
 <form data-aos="fade-down" data-aos-duration="2000"  action="{% url 'learnwithyourkids:search' %}" method="get" class="shadow-lg card box container" style="padding: 25px; border-bottom: #c951f6 5px solid;border-top: #c951f6 5px solid ;border-radius: 30px;text-align: right">
@@ -54,7 +54,7 @@
 </form>
 <div class="row">
 {%for lwyk in lwyks %}
-    <div class="col-lg-6" style="min-height: 900px;text-align: right">
+    <div class="col-lg-6" style="min-height: 600px;text-align: right">
     <br>
     <div class="card container post" data-aos="fade-up"
      data-aos-duration="3000"  style="padding: 25px;border-radius:30px;box-shadow: aliceblue 2px 4px 4px;height: 100% " >
@@ -69,9 +69,6 @@
         <!--hotbink-->
         <p style="text-align:right ;margin-right: 10px;">{{ lwyk.description }}</p>
         <hr>
-        {% for tag in lwyk.tags.all %}
-            <p style="color: blue;">{{ tag.name }}</p>
-        {% endfor %}
         </div>
         <div>
             <a href="{{ lwyk.url }}">
@@ -90,6 +87,6 @@
 <script>
   AOS.init();
 </script>
-</body>
+</bodys>
 </html>
 {% endblock content %}

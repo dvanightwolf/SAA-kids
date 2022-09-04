@@ -1,30 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-import json
-from django.http import JsonResponse
-from django.core.serializers import serialize
-from SAA.settings import STATIC_URL
 from activity.models import Activity, ActivityPhoto
 from .models import WorkShops, Day, Photo, Material
 from taggit.models import Tag
 from django.db.models import Q
-import datetime
-
-
-def w_filler(workshop):
-    dic = {}
-    dic['title'] = workshop.title
-    dic['start'] = datetime.datetime.strptime(str(workshop.start_date), "%Y-%m-%d").strftime("%Y-%m-%d")
-    dic['end'] = datetime.datetime.strptime(str(workshop.end_date), "%Y-%m-%d").strftime("%Y-%m-%d")
-    dic['url'] = workshop.get_url
-    return dic
-
-
-def a_filler(activity):
-    dic = {}
-    dic['title'] = activity.title
-    dic['start'] = datetime.datetime.strptime(str(activity.date), "%Y-%m-%d").strftime("%Y-%m-%d")
-    dic['url'] = activity.get_url
-    return dic
 
 
 def search(request):
@@ -78,17 +56,16 @@ def search(request):
                                                                   'activity': activities})
 
 
-def calender(request):
-    """List all workshops."""
-    content = []
-
-    for workshop in WorkShops.objects.filter(is_active=True):
-        content.append(w_filler(workshop))
-
-    for activity in Activity.objects.filter(is_active=True):
-        content.append(a_filler(activity))
-    context = {'content': content}
-    return render(request, "calender.html", context)
+def workshops_activities(request):
+    # Get all workshops.
+    workshops = WorkShops.objects.filter(is_active=True).order_by('-id')
+    # Get all activities.
+    activity = Activity.objects.filter(is_active=True).order_by('-id')
+    # Put the info in a dictionary.
+    context = {"workshops": workshops,
+               "activity": activity}
+    # Render show page and send the dictionary to it.
+    return render(request, "workshops_and_activities_show.html", context)
 
 
 def details(request, workshop_id, slug):
@@ -107,14 +84,8 @@ def details(request, workshop_id, slug):
 def archive(request):
     # Get all workshops.
     workshops = WorkShops.objects.filter(is_active=False).order_by('-id')
-    days = Day.objects.all().order_by('day')
-    photo = Photo.objects.all()
-    tags = Tag.objects.all()
     # Get all activities.
     activity = Activity.objects.filter(is_active=False).order_by('-id')
-    tags = Tag.objects.all()
-    photos = ActivityPhoto.objects.all()
-    context = {}
     # Put the info in a dictionary.
     context = {"workshops": workshops,
                "activity": activity}

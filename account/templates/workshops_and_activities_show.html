@@ -10,7 +10,7 @@
 <body>
 <form  action="{% url 'workshops:search' %}" method="get" style="padding: 25px; border-bottom: #c951f6 5px solid;border-top: #c951f6 5px solid ;border-radius: 30px;text-align: right" >
          <div>
-         <input list="b" name="search" type="search" id="search"  placeholder="&#xF002; search something" style="border-radius: 20px">
+         <input list="b" name="search" type="search" id="search"  placeholder=" أبحث هنا" style="border-radius: 20px">
          <input type="date" name="SDate" style="border-radius: 20px">
          <input type="date" name="EDate" style="border-radius: 20px">
              <datalist id="b">
@@ -19,7 +19,7 @@
                  {% endfor %}
              </datalist>
             <select  name="tag" id="tag"  style="border-radius: 20px">
-            <option value="0">None</option>
+            <option value="0">تصنيفات</option>
                 {% for t in tags%}
                     <option value="{{ t.id }}">{{ t.name }}</option>
                 {% endfor %}
@@ -32,13 +32,13 @@
 
 <div class="card container" style="padding: 25px; border-right: rgb(23,202,240) 5px solid;border-bottom: rgb(23,202,240) 5px solid;border-radius:30px;box-shadow: aliceblue 2px 4px 4px;">
     <h1 style="margin: auto;color: rgb(23,202,240)" >
-        Workshops
+        ورشات
     </h1>
 </div>
 <br><br>
 <div class="row">
 {% for workshop in workshops %}
-    {% if not workshop.is_active %}
+    {% if workshop.is_active %}
         <div class="col-lg-6" style="min-height: 400px;text-align: right">
         <div class="card container " style="padding: 25px; border-right: rgb(23,202,240) 5px solid;border-bottom: rgb(23,202,240) 5px solid;border-radius:30px;box-shadow: aliceblue 2px 4px 4px;height: 100% " >
             <div class="center">
@@ -52,7 +52,7 @@
             <p style="color: red"> {{ workshop.end_date }}:ينتهي في</p>
             <div>
                 <a href="{{ workshop.get_url }}">
-                    <input class="btn btn-primary" type="button" value="المحتوى" style="border-radius: 50px;background-color: rgb(23,202,240);border: rgb(23,202,240) 1px solid">
+                    <input class="btn btn-primary" type="button" value="Details" style="border-radius: 50px;background-color: rgb(23,202,240);border: rgb(23,202,240) 1px solid">
                 </a>
             </div>
         </div>
@@ -64,7 +64,7 @@
 <br><br>
 <div class="card container" style="padding: 25px; border-right: magenta 5px solid;border-bottom: magenta 5px solid;border-radius:30px;box-shadow: aliceblue 2px 4px 4px;">
     <h1 style="margin: auto;color: magenta">
-        Activities
+        نشاطات
     </h1>
 </div>
 <br><br>
@@ -77,6 +77,18 @@
                     <img class="shadow-lg " src="{{ act.post_photo.url }}" width="100%" height="100%">
                 </a>
             </div>
+             <br>
+             <div class="row" >
+                 {% for i in photos %}
+                        {%if i.activity == act%}
+                          <div class="col-sm-4">
+                          <a href="{{ i.photo.url }}">
+                              <img src="{{ i.photo.url }}" width="100%" height="100%" id="img" style="border-radius: 30px;">
+                          </a>
+                            </div>
+                         {% endif %}
+                         {% endfor %}
+             </div>
              <br>
              <div>
                 <h1 style="margin: auto; color: magenta">   {{ act.title }}</h1>

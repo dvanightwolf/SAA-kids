@@ -58,3 +58,26 @@ class Material(models.Model):
 
     def __str__(self):
         return str(self.ttp)
+
+
+class TTPArticle(models.Model):
+    title = models.CharField(max_length=255, null=False, blank=False)
+    slug = models.SlugField(max_length=255, null=False, blank=False)
+    post_photo = models.ImageField(upload_to="Article/", blank=False, null=False,
+                                   default="saa_logo.png")
+    tags = TaggableManager()
+    video_url = models.URLField(blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def get_url(self):
+        return reverse('teacherteachingprogram:ttp_article_details', args=[self.pk, self.slug])
+
+    def __str__(self):
+        return self.title
+
+
+class TTPArticleContent(models.Model):
+    article = models.ForeignKey(TTPArticle, on_delete=models.CASCADE, null=False, blank=False)
+    article_text = models.TextField()
+    photo = models.ImageField(upload_to="article/", blank=True, null=False)

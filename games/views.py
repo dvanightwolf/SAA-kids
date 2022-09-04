@@ -21,3 +21,7 @@ def api(request):
 
 def play_game(request, id, title):
     return render(request, 'play_game.html', {'id': id, 'title': title})
+
+
+def solar(request):
+    return render(request, 'stars.html')

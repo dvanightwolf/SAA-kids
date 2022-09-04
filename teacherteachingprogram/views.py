@@ -1,6 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
-from .models import TTP, Day, Photo, Material
+from .models import TTP, Day, Photo, Material, TTPArticle, TTPArticleContent
 from taggit.models import Tag
 
 
@@ -69,3 +69,17 @@ def ttp_details(request, ttp_id, ttp_slug):
     context = {"ttp": ttp, 'days': days, "photos": photos, 'materials_show': materials_show,
                'materials': materials, 'visible': visible}
     return render(request, "ttp_details.html", context)
+
+
+def ttp_article(request):
+    articles = TTPArticle.objects.all().order_by('-id')
+    tags = Tag.objects.all()
+    context = {"articles": articles, 'tags': tags}
+    return render(request, 'ArticleArchives.html', context)
+
+
+def ttp_article_details(request, article_id, slug):
+    article = get_object_or_404(TTPArticle, pk=article_id, slug=slug)
+    article_contents = TTPArticleContent.objects.filter(article=article)
+    context = {"article": article, "article_contents": article_contents}
+    return render(request, 'ttp_article_details.html', context)

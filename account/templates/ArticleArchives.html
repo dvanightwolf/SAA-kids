@@ -33,7 +33,7 @@
     </style>
 </head>
 <body onload="changeBackground()">
-<form data-aos="fade-down" data-aos-duration="2000"  action="{% url 'learnwithyourkids:search' %}" method="get" class="shadow-lg card box container" style="padding: 25px; border-bottom: #c951f6 5px solid;border-top: #c951f6 5px solid ;border-radius: 30px;text-align: right">
+<form data-aos="fade-down" data-aos-duration="2000"  action="{% url 'learnwithyourkids:article_search' %}" method="get" class="shadow-lg card box container" style="padding: 25px; border-bottom: #c951f6 5px solid;border-top: #c951f6 5px solid ;border-radius: 30px;text-align: right">
      <div>
          <input list="b" name="search" type="search" id="search"  placeholder="ابحث" style="border-radius: 50px;text-align: right">
              <datalist id="b">
@@ -76,8 +76,10 @@
             </a>
         </div>
     </div>
+        </div>
     {% endfor %}
 </div>
+
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
   AOS.init();
